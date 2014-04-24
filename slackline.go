@@ -9,6 +9,7 @@ import (
 	"io"
 	"io/ioutil"
 	"net/http"
+	"os"
 )
 
 const postMessageURL = "/services/hooks/incoming-webhook?token="
@@ -62,6 +63,11 @@ func main() {
 
 		domain := req.URL.Query().Get("domain")
 		token := req.URL.Query().Get("token")
+
+		if os.Getenv("DEBUG_BRIDGE") == domain {
+			fmt.Printf("Request: %v\n", req.PostForm)
+			fmt.Printf("Message: %v\n", msg)
+		}
 
 		err := msg.sendTo(domain, token)
 
