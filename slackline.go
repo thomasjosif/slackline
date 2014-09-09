@@ -10,6 +10,7 @@ import (
 	"io/ioutil"
 	"net/http"
 	"os"
+	"regexp"
 )
 
 const postMessageURL = "/services/hooks/incoming-webhook?token="
@@ -25,6 +26,12 @@ func (s slackMessage) payload() io.Reader {
 	json, _ := json.Marshal(s)
 	content = append(content, json...)
 	return bytes.NewReader(content)
+}
+
+var mentionRegexp = regexp.MustCompile("<@([^>]+)>")
+
+func (s *slackMessage) containsMention() bool {
+	return mentionRegexp.MatchString(s.Text)
 }
 
 func (s slackMessage) sendTo(domain, token string) (err error) {
@@ -68,6 +75,8 @@ func main() {
 			fmt.Printf("Request: %v\n", req.PostForm)
 			fmt.Printf("Message: %v\n", msg)
 		}
+
+		fmt.Printf("message=received domain=%s hasMention=%v token=%s\n", domain, msg.containsMention(), token)
 
 		err := msg.sendTo(domain, token)
 
