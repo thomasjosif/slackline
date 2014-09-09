@@ -81,10 +81,10 @@ func main() {
 		err := msg.sendTo(domain, token)
 
 		if err != nil {
-			fmt.Printf("Error: %s\n", err.Error())
+			fmt.Printf("message=error description=%#v\n", err.Error())
 			res.WriteHeader(500)
 		} else {
-			fmt.Println("Message sent")
+			fmt.Println("message=sent")
 		}
 	})
 	m.Run()
