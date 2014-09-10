@@ -1,25 +1,45 @@
 # Share channels between Slack accounts!
 
+## Why did we develop Slackline?
+
 We are big fans of [Slack][slack] and have been using it for a while
 now. Our friends at [Vizzuality][vizzuality] started using it recently
-and we missed not being able to speak with them, so I just created a
-quick service to link two channels from two Slack organizations.
+and we missed not being able to speak with them. We started with a light
+integration with Slack using 4 webhooks and this project.
 
-## How can I set it up?
+This project evolved into a simpler and better version you can pay for: [slackline.io](http://slackline.io)
 
-Dead simple, follow this steps from each organization's account.
+We are maintaining this small project free and open source for those who don't need slackline.io.
 
- 1. Create a channel you want to share with another organization.
+## What is the difference between the free and paid Slackline?
+
+The free version is a light integration with the Slack API just using incoming and outgoing webhooks.
+
+[slackline.io](http://slackline.io) allows you to:
+ - See the avatars from the users in the other team.
+ - Easier to setup: create your shared channel, share the URL to the shared channel with somebody in the other team and they can connect their team by themselves. No need to exchange tokens or manually craft URLs.
+ - Support for more than two teams connected to the same shared channel.
+ - Any team can change the channel they are using with no need to change anything in the other teams.
+
+[slackline.io](http://slackline.io) is still under development, but you can try it for free connecting to our [#slackline shared channel](http://slackline.io/shared_channels/slackline) and we'll notify you as soon as it's available.
+
+## How do I use slackline for free?
+
+We would obviously recommend you use [slackline.io](http://slackline.io) since it's easier to setup and seeing avatars from those on the other side really rocks. But, if you want to use this version, that's cool with us too! :)
+
+You just need to follow the following steps to setup a channel.
+
+ 1. Create a channel you want to share with another team.
  2. Create an Incoming WebHook integration and select the channel you created.
  3. Copy the Incoming WebHook token (you can find it in the left column
     from the integration page).
- 4. Create a URL with the following format: ```http://slackline.herokuapp.com/bridge/?token=[TOKEN]&domain=[YOUR_SLACK_DOMAIN]``` send it to the person setting up the other organization.
- 5. The person setting up the other organization will send you a similar
+ 4. Create a URL with the following format: ```http://slackline.herokuapp.com/bridge/?token=[TOKEN]&domain=[YOUR_SLACK_DOMAIN]``` send it to the person setting up the other team.
+ 5. The person setting up the other team will send you a similar
     URL with their domain and token, create an Outgoing WebHook with
     that URL and the channel you created in step 1.
 
-Once you have done this in both organizations, you will have a chat-room
-shared by both organizations.
+Once you have done this in both teams, you will have a chat-room
+shared by both teams.
 
 Here you have an example of a Outgoing WebHook URL:
 
@@ -31,15 +51,6 @@ http://slackline.herokuapp.com/bridge/?token=bcaa5867b1d42142b74eDVA4&domain=ave
 
 We are just bridging hooks, we don't store any messages going through
 the bridge.
-
-## ToDo
-
-We don't support custom avatars right now.
-
-If somebody from Slack is reading this, it would be great to be able to
-set the ```icon_url``` for the message to be something like
-```http://[DOMAIN]/avatar/[USER_ID]``` to set the USER_ID based on the
-information from the Outgoing WebHook with no extra requests or state.
 
 ## DISCLAIMER
 
