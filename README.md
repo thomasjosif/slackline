@@ -7,9 +7,9 @@ now. Our friends at [Vizzuality][vizzuality] started using it recently
 and we missed not being able to speak with them. We started with a light
 integration with Slack using 4 webhooks and this project.
 
-This project evolved into a simpler and better version you can pay for: [slackline.io](http://slackline.io)
+This gave way to better way to share channels across between slack teams: [slackline.io](http://slackline.io)
 
-We are maintaining this small project free and open source for those who don't need slackline.io.
+**You can try it for free joining our [#slackline shared channel](http://slackline.io/shared_channels/slackline)**
 
 ## What is the difference between the free and paid Slackline?
 
