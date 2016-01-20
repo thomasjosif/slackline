@@ -42,6 +42,10 @@ func (s slackMessage) sendTo(domain, token string) (err error) {
 		"application/x-www-form-urlencoded",
 		payload,
 	)
+	
+	if err != nil {
+		return err
+	}
 
 	if res.StatusCode != 200 {
 		defer res.Body.Close()
