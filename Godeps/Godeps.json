@@ -1,6 +1,9 @@
 {
 	"ImportPath": "github.com/ernesto-jimenez/slackline",
-	"GoVersion": "go1.2",
+	"GoVersion": "go1.5",
+	"Packages": [
+		"./..."
+	],
 	"Deps": [
 		{
 			"ImportPath": "github.com/codegangsta/inject",
