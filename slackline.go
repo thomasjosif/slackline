@@ -16,13 +16,15 @@ import (
 const postMessageURL = "/services/hooks/incoming-webhook?token="
 
 type slackMessage struct {
-	Channel  string `json:"channel"`
-	Username string `json:"username"`
-	Text     string `json:"text"`
+	Channel   string `json:"channel"`
+	Username  string `json:"username"`
+	Text      string `json:"text"`
+	LinkNames bool   `json:"link_names"`
 }
 
 func (s slackMessage) payload() io.Reader {
 	content := []byte("payload=")
+	s.LinkNames = true
 	json, _ := json.Marshal(s)
 	content = append(content, json...)
 	return bytes.NewReader(content)
@@ -42,7 +44,7 @@ func (s slackMessage) sendTo(domain, token string) (err error) {
 		"application/x-www-form-urlencoded",
 		payload,
 	)
-	
+
 	if err != nil {
 		return err
 	}
