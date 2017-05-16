@@ -93,7 +93,7 @@ func main() {
 			return
 		}
 		// Remove whitespace
-		strings.Replace(userid, " ", "", -1)
+		userid = strings.Replace(userid, " ", "", -1)
 
 		if admins[username] {
 			editedusername = username + " (" + team + ") [Integrations Admin]"
