@@ -16,8 +16,6 @@ import (
 )
 
 const postMessageURL = "/services/hooks/incoming-webhook?token="
-admins := [...]string{"thomasjosif", "sirius", "kigen", "homer", "imasonaz", "ruthless"}
-
 
 type slackMessage struct {
 	Channel   string `json:"channel"`
@@ -73,6 +71,11 @@ func stringInSlice(a string, list []string) bool {
 }
 
 func main() {
+
+	admins := map[string]bool {
+    "thomasjosif": true,
+    "sirius": true,
+	}
     	//api := slack.New("")
 	m := martini.Classic()
 	m.Post("/bridge", func(res http.ResponseWriter, req *http.Request) {
@@ -80,16 +83,16 @@ func main() {
 		text := req.PostFormValue("text")
 		team := req.PostFormValue("team_domain")
 		//userid := req.PostFormValue("user_id")
+		editedusername := "NULL"
 
 		if username == "slackbot" {
 			// Avoid infinite loop
 			return
 		}
-		if(stringInSlice(username, admins)) {
-			editedusername := username + " (" + team + ") [Integrations Admin]"
-		}
-		else {
-			editedusername := username + " (" + team + ") [Integrations Admin]"
+		if admins[username] {
+			editedusername = username + " (" + team + ") [Integrations Admin]"
+		} else {
+			editedusername = username + " (" + team + ") [Integrations Admin]"
 		}
 		
 		// Get avatar.
