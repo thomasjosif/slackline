@@ -1,1 +1,1 @@
-web: slackline
+web: hellsgamers-slack-bridge
