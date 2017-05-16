@@ -74,8 +74,11 @@ func main() {
 	admins := map[string]bool {
     "thomasjosif": true,
     "sirius": true,
+    "kigen": true,
+    "ruthless": true,
+    "imasonaz": true,
+    "homer": true,
 	}
-    api := slack.New("xoxp-3312804109-17631456594-109929503990-2b6d09f7e3b702f6e3530cfe7e2d7b50")
 	m := martini.Classic()
 	m.Post("/bridge", func(res http.ResponseWriter, req *http.Request) {
 		username := req.PostFormValue("user_name")
@@ -88,12 +91,23 @@ func main() {
 			// Avoid infinite loop
 			return
 		}
+
 		if admins[username] {
 			editedusername = username + " (" + team + ") [Integrations Admin]"
 		} else {
 			editedusername = username + " (" + team + ") [Integrations Admin]"
 		}
-		
+
+		api := slack.New("xoxp-3312804109-17631456594-109929503990-2b6d09f7e3b702f6e3530cfe7e2d7b50")
+		if team == "hellsgamers" {
+			api = slack.New("xoxp-3312804109-17631456594-109929503990-2b6d09f7e3b702f6e3530cfe7e2d7b50")
+		} else if team == "hg-ce" {
+			api = slack.New("xoxp-3312804109-17631456594-109929503990-2b6d09f7e3b702f6e3530cfe7e2d7b50")
+		} else if team == "hgdc" {
+			api = slack.New("xoxp-3314437535-27979768499-56435079442-984e0e3695")
+		} else if team == "hgmods" {
+			api = slack.New("xoxp-3415257541-4188843770-72677959637-70945b73f4")
+		} 
 		// Get avatar.
 		user, error := api.GetUserInfo(userid)
    		if error != nil {
