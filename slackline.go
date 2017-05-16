@@ -99,6 +99,7 @@ func main() {
 		}
 
 		if team == "hellsgamers" {
+			fmt.Printf("Using hellsgamers")
 			hellsgamers := slack.New("xoxp-3312804109-17631456594-109929503990-2b6d09f7e3b702f6e3530cfe7e2d7b50")
 			// Get avatar.
 			hguser, hgerror := hellsgamers.GetUserInfo(userid)
@@ -108,6 +109,7 @@ func main() {
 	   		}
 	   		avatar = hguser.Profile.ImageOriginal
 		} else if team == "hg-ce" {
+			fmt.Printf("Using hg-ce")
 			hgce := slack.New("xoxp-3312804109-17631456594-109929503990-2b6d09f7e3b702f6e3530cfe7e2d7b50")
 			// Get avatar.
 			hgceuser, hgceerror := hgce.GetUserInfo(userid)
@@ -117,6 +119,7 @@ func main() {
 	   		}
 	   		avatar = hgceuser.Profile.ImageOriginal
 		} else if team == "hgdc" {
+			fmt.Printf("Using hgdc")
 			hgdc := slack.New("xoxp-3314437535-27979768499-56435079442-984e0e3695")
 			// Get avatar.
 			hgdcuser, hgdcerror := hgdc.GetUserInfo(userid)
@@ -126,6 +129,7 @@ func main() {
 	   		}
 	   		avatar = hgdcuser.Profile.ImageOriginal
 		} else if team == "hgmods" {
+			fmt.Printf("Using hgmods")
 			hgmods := slack.New("xoxp-3415257541-4188843770-72677959637-70945b73f4")
 			// Get avatar.
 			hgmodsuser, hgmodserror := hgmods.GetUserInfo(userid)
