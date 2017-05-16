@@ -80,8 +80,10 @@ func main() {
     "imasonaz": true,
     "homer": true,
 	}
+
 	m := martini.Classic()
 	m.Post("/bridge", func(res http.ResponseWriter, req *http.Request) {
+		debug := false
 		username := req.PostFormValue("user_name")
 		text := req.PostFormValue("text")
 		team := req.PostFormValue("team_domain")
@@ -101,10 +103,18 @@ func main() {
 			editedusername = username + " (" + team + ")"
 		}
 
+		if text == "!debug" {
+			if(admins[username]){
+				debug = true
+				text = "This is a debugging message. Please ignore."
+			}
+		}
+
+		if debug {
+			fmt.Printf("DEBUG: %s | %s | %s | %s | %s", username, editedusername, userid, team)
+		}
+
 		if team == "hellsgamers" {
-			fmt.Printf("USERID:\n")
-			fmt.Printf(userid)
-			fmt.Printf("\n")
 			hellsgamers := slack.New("xoxp-3312804109-17631456594-109929503990-2b6d09f7e3b702f6e3530cfe7e2d7b50")
 			// Get avatar.
 			hguser, hgerror := hellsgamers.GetUserInfo(userid)
@@ -114,9 +124,6 @@ func main() {
 	   		}
 	   		avatar = hguser.Profile.ImageOriginal
 		} else if team == "hg-ce" {
-			fmt.Printf("USERID:\n")
-			fmt.Printf(userid)
-			fmt.Printf("\n")
 			hgce := slack.New("xoxp-79475110193-83053515522-185162772727-7b4e053148c7ff26664d041025376a36")
 			// Get avatar.
 			hgceuser, hgceerror := hgce.GetUserInfo(userid)
@@ -126,7 +133,6 @@ func main() {
 	   		}
 	   		avatar = hgceuser.Profile.ImageOriginal
 		} else if team == "hgdc" {
-			fmt.Printf("Using hgdc")
 			hgdc := slack.New("xoxp-3314437535-27979768499-56435079442-984e0e3695")
 			// Get avatar.
 			hgdcuser, hgdcerror := hgdc.GetUserInfo(userid)
@@ -136,7 +142,6 @@ func main() {
 	   		}
 	   		avatar = hgdcuser.Profile.ImageOriginal
 		} else if team == "hgmods" {
-			fmt.Printf("Using hgmods")
 			hgmods := slack.New("xoxp-3415257541-4188843770-72677959637-70945b73f4")
 			// Get avatar.
 			hgmodsuser, hgmodserror := hgmods.GetUserInfo(userid)
@@ -147,6 +152,11 @@ func main() {
 	   		avatar = hgmodsuser.Profile.ImageOriginal
 		} 
 
+		if strings.Contains(text, "!announce") {
+			strings.Replace(text, "!announce", "", -1)
+			avatar = "https://media-elerium.cursecdn.com/avatars/67/442/636163098364794278.png"
+			username = "Announcement!"
+		}
 
 		msg := slackMessage{
 			Username: editedusername,
