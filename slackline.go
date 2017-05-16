@@ -86,7 +86,7 @@ func main() {
 		team := req.PostFormValue("team_domain")
 		userid := req.PostFormValue("user_id")
 		editedusername := "NULL"
-
+		avatar := "http://expatclaptrap.com/wp-content/uploads/2014/12/Unknown-person1.gif"
 		if username == "slackbot" {
 			// Avoid infinite loop
 			return
@@ -98,27 +98,49 @@ func main() {
 			editedusername = username + " (" + team + ") [Integrations Admin]"
 		}
 
-		api := slack.New("xoxp-3312804109-17631456594-109929503990-2b6d09f7e3b702f6e3530cfe7e2d7b50")
 		if team == "hellsgamers" {
-			api = slack.New("xoxp-3312804109-17631456594-109929503990-2b6d09f7e3b702f6e3530cfe7e2d7b50")
+			hellsgamers := slack.New("xoxp-3312804109-17631456594-109929503990-2b6d09f7e3b702f6e3530cfe7e2d7b50")
+			// Get avatar.
+			hguser, hgerror := hellsgamers.GetUserInfo(userid)
+	   		if hgerror != nil {
+		  	    fmt.Printf("%s\n", hgerror)
+		  	    return
+	   		}
+	   		avatar = hguser.Profile.ImageOriginal
 		} else if team == "hg-ce" {
-			api = slack.New("xoxp-3312804109-17631456594-109929503990-2b6d09f7e3b702f6e3530cfe7e2d7b50")
+			hgce := slack.New("xoxp-3312804109-17631456594-109929503990-2b6d09f7e3b702f6e3530cfe7e2d7b50")
+			// Get avatar.
+			hgceuser, hgceerror := hgce.GetUserInfo(userid)
+	   		if hgceerror != nil {
+		  	    fmt.Printf("%s\n", hgceerror)
+		  	    return
+	   		}
+	   		avatar = hgceuser.Profile.ImageOriginal
 		} else if team == "hgdc" {
-			api = slack.New("xoxp-3314437535-27979768499-56435079442-984e0e3695")
+			hgdc := slack.New("xoxp-3314437535-27979768499-56435079442-984e0e3695")
+			// Get avatar.
+			hgdcuser, hgdcerror := hgdc.GetUserInfo(userid)
+	   		if hgdcerror != nil {
+		  	    fmt.Printf("%s\n", hgdcerror)
+		  	    return
+	   		}
+	   		avatar = hgdcuser.Profile.ImageOriginal
 		} else if team == "hgmods" {
-			api = slack.New("xoxp-3415257541-4188843770-72677959637-70945b73f4")
+			hgmods := slack.New("xoxp-3415257541-4188843770-72677959637-70945b73f4")
+			// Get avatar.
+			hgmodsuser, hgmodserror := hgmods.GetUserInfo(userid)
+	   		if hgmodserror != nil {
+		  	    fmt.Printf("%s\n", hgmodserror)
+		  	    return
+	   		}
+	   		avatar = hgmodsuser.Profile.ImageOriginal
 		} 
-		// Get avatar.
-		user, error := api.GetUserInfo(userid)
-   		if error != nil {
-	  	    fmt.Printf("%s\n", error)
-	  	    return
-   		}
+
 
 		msg := slackMessage{
 			Username: editedusername,
 			Text:     text,
-			Avatar:   user.Profile.ImageOriginal,
+			Avatar:   avatar,
 		}
 
 		domain := req.URL.Query().Get("domain")
