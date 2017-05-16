@@ -6,11 +6,13 @@ import (
 	"errors"
 	"fmt"
 	"github.com/codegangsta/martini"
+	"github.com/nlopes/slack"
 	"io"
 	"io/ioutil"
 	"net/http"
 	"os"
 	"regexp"
+	"strings"
 )
 
 const postMessageURL = "/services/hooks/incoming-webhook?token="
@@ -19,6 +21,7 @@ type slackMessage struct {
 	Channel   string `json:"channel"`
 	Username  string `json:"username"`
 	Text      string `json:"text"`
+	Avatar    string `json:"icon_url"`
 	LinkNames bool   `json:"link_names"`
 }
 
@@ -59,19 +62,30 @@ func (s slackMessage) sendTo(domain, token string) (err error) {
 }
 
 func main() {
+    	api := slack.New("xoxp-3312804109-17631456594-109929503990-2b6d09f7e3b702f6e3530cfe7e2d7b50")
 	m := martini.Classic()
 	m.Post("/bridge", func(res http.ResponseWriter, req *http.Request) {
 		username := req.PostFormValue("user_name")
 		text := req.PostFormValue("text")
+		team := req.PostFormValue("team_domain")
+		userid := req.PostFormValue("user_id")
 
 		if username == "slackbot" {
 			// Avoid infinite loop
 			return
 		}
+		
+		// Get avatar.
+		user, err := api.GetUserInfo(userid)
+   		if err != nil {
+	  	    fmt.Printf("%s\n", err)
+	  	    return
+   		}
 
 		msg := slackMessage{
 			Username: username,
 			Text:     text,
+			Avatar:   user.Profile.ImageOriginal,
 		}
 
 		domain := req.URL.Query().Get("domain")
