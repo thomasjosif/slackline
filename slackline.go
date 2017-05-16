@@ -98,7 +98,7 @@ func main() {
 		if admins[username] {
 			editedusername = username + " (" + team + ") [Integrations Admin]"
 		} else {
-			editedusername = username + " (" + team + ") [Integrations Admin]"
+			editedusername = username + " (" + team + ")"
 		}
 
 		if team == "hellsgamers" {
