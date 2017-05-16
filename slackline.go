@@ -109,7 +109,8 @@ func main() {
 	   		}
 	   		avatar = hguser.Profile.ImageOriginal
 		} else if team == "hg-ce" {
-			fmt.Printf("Using hg-ce")
+			fmt.Printf("Using hg-ce\n %s", userid)
+			fmt.Printf("SPACER+++++++ \n")
 			hgce := slack.New("xoxp-3312804109-17631456594-109929503990-2b6d09f7e3b702f6e3530cfe7e2d7b50")
 			// Get avatar.
 			hgceuser, hgceerror := hgce.GetUserInfo(userid)
