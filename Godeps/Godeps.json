@@ -1,26 +1,26 @@
 {
-	"ImportPath": "github.com/ernesto-jimenez/slackline",
-	"GoVersion": "go1.5",
-	"Packages": [
-		"./..."
-	],
+	"ImportPath": "slackline",
+	"GoVersion": "go1.8",
+	"GodepVersion": "v79",
 	"Deps": [
 		{
 			"ImportPath": "github.com/codegangsta/inject",
-			"Rev": "8b1a9340f98d4526c7d962e71856c2d29670db36"
+			"Comment": "v1.0-rc1-10-g33e0aa1",
+			"Rev": "33e0aa1cb7c019ccc3fbe049a8262a6403d30504"
 		},
 		{
 			"ImportPath": "github.com/codegangsta/martini",
-			"Comment": "v0.1-21-gb836f38",
-			"Rev": "b836f3858ac3e76e09b425f7cc49bf4dcc371686"
+			"Comment": "v1.0-188-g22fa469",
+			"Rev": "22fa46961aabd2665cf3f1343b146d20028f5071"
 		},
-        {
-           "ImportPath": "golang.org/x/net",
-           "Rev": "34057069f4ab13dc4433c68d368737ebeafcccdc"
-        },
-        {
-            "ImportPath": "github.com/nlopes",
-            "Rev": "72d15a0fc0b773a59c00f78b9e7d97eeb8c4281f"
-        }
+		{
+			"ImportPath": "github.com/nlopes/slack",
+			"Comment": "v0.0.1-210-g72d15a0",
+			"Rev": "72d15a0fc0b773a59c00f78b9e7d97eeb8c4281f"
+		},
+		{
+			"ImportPath": "golang.org/x/net/websocket",
+			"Rev": "34057069f4ab13dc4433c68d368737ebeafcccdc"
+		}
 	]
 }
