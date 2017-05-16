@@ -153,9 +153,11 @@ func main() {
 		} 
 
 		if strings.Contains(text, "!announce") {
-			strings.Replace(text, "!announce", "", -1)
-			avatar = "https://media-elerium.cursecdn.com/avatars/67/442/636163098364794278.png"
-			username = "Announcement!"
+			if(admins[username]){
+				text = strings.Replace(text, "!announce", "", -1)
+				avatar = "http://icons.iconarchive.com/icons/graphicloads/100-flat/256/announcement-icon.png"
+				editedusername = "Announcement"
+			}
 		}
 
 		msg := slackMessage{
