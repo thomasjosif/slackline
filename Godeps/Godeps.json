@@ -13,6 +13,10 @@
 			"ImportPath": "github.com/codegangsta/martini",
 			"Comment": "v0.1-21-gb836f38",
 			"Rev": "b836f3858ac3e76e09b425f7cc49bf4dcc371686"
-		}
+		},
+        {
+            "ImportPath": "github.com/nlopes",
+            "Rev": "72d15a0fc0b773a59c00f78b9e7d97eeb8c4281f"
+        }
 	]
 }
