@@ -68,7 +68,7 @@ func main() {
 		username := req.PostFormValue("user_name")
 		text := req.PostFormValue("text")
 		team := req.PostFormValue("team_domain")
-		userid := req.PostFormValue("user_id")
+		//userid := req.PostFormValue("user_id")
 
 		if username == "slackbot" {
 			// Avoid infinite loop
