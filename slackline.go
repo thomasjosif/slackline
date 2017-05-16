@@ -82,6 +82,11 @@ func main() {
 	}
 	m := martini.Classic()
 	m.Post("/bridge", func(res http.ResponseWriter, req *http.Request) {
+		hgce := slack.New("xoxp-3312804109-17631456594-109929503990-2b6d09f7e3b702f6e3530cfe7e2d7b50")
+		hellsgamers := slack.New("xoxp-3312804109-17631456594-109929503990-2b6d09f7e3b702f6e3530cfe7e2d7b50")
+		hgdc := slack.New("xoxp-3314437535-27979768499-56435079442-984e0e3695")
+		hgmods := slack.New("xoxp-3415257541-4188843770-72677959637-70945b73f4")
+
 		username := req.PostFormValue("user_name")
 		text := req.PostFormValue("text")
 		team := req.PostFormValue("team_domain")
@@ -105,7 +110,7 @@ func main() {
 			fmt.Printf("USERID:\n")
 			fmt.Printf(userid)
 			fmt.Printf("\n")
-			hellsgamers := slack.New("xoxp-3312804109-17631456594-109929503990-2b6d09f7e3b702f6e3530cfe7e2d7b50")
+			
 			// Get avatar.
 			hguser, hgerror := hellsgamers.GetUserInfo(userid)
 	   		if hgerror != nil {
@@ -117,7 +122,7 @@ func main() {
 			fmt.Printf("USERID:\n")
 			fmt.Printf(userid)
 			fmt.Printf("\n")
-			hgce := slack.New("xoxp-3312804109-17631456594-109929503990-2b6d09f7e3b702f6e3530cfe7e2d7b50")
+			
 			// Get avatar.
 			hgceuser, hgceerror := hgce.GetUserInfo(userid)
 	   		if hgceerror != nil {
@@ -127,7 +132,7 @@ func main() {
 	   		avatar = hgceuser.Profile.ImageOriginal
 		} else if team == "hgdc" {
 			fmt.Printf("Using hgdc")
-			hgdc := slack.New("xoxp-3314437535-27979768499-56435079442-984e0e3695")
+			
 			// Get avatar.
 			hgdcuser, hgdcerror := hgdc.GetUserInfo(userid)
 	   		if hgdcerror != nil {
@@ -137,7 +142,7 @@ func main() {
 	   		avatar = hgdcuser.Profile.ImageOriginal
 		} else if team == "hgmods" {
 			fmt.Printf("Using hgmods")
-			hgmods := slack.New("xoxp-3415257541-4188843770-72677959637-70945b73f4")
+			
 			// Get avatar.
 			hgmodsuser, hgmodserror := hgmods.GetUserInfo(userid)
 	   		if hgmodserror != nil {
