@@ -12,6 +12,7 @@ import (
 	"net/http"
 	"os"
 	"regexp"
+	"strings"
 )
 
 const postMessageURL = "/services/hooks/incoming-webhook?token="
@@ -91,6 +92,8 @@ func main() {
 			// Avoid infinite loop
 			return
 		}
+		// Remove whitespace
+		strings.Replace(userid, " ", "", -1)
 
 		if admins[username] {
 			editedusername = username + " (" + team + ") [Integrations Admin]"
