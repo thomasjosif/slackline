@@ -16,6 +16,8 @@ import (
 )
 
 const postMessageURL = "/services/hooks/incoming-webhook?token="
+admins := [...]string{"thomasjosif", "sirius", "kigen", "homer", "imasonaz", "ruthless"}
+
 
 type slackMessage struct {
 	Channel   string `json:"channel"`
@@ -61,6 +63,15 @@ func (s slackMessage) sendTo(domain, token string) (err error) {
 	return
 }
 
+func stringInSlice(a string, list []string) bool {
+    for _, b := range list {
+        if b == a {
+            return true
+        }
+    }
+    return false
+}
+
 func main() {
     	//api := slack.New("")
 	m := martini.Classic()
@@ -74,6 +85,12 @@ func main() {
 			// Avoid infinite loop
 			return
 		}
+		if(stringInSlice(username, admins)) {
+			editedusername := username + " (" + team + ") [Integrations Admin]"
+		}
+		else {
+			editedusername := username + " (" + team + ") [Integrations Admin]"
+		}
 		
 		// Get avatar.
 		/*user, err := api.GetUserInfo(userid)
@@ -83,7 +100,7 @@ func main() {
    		}*/
 
 		msg := slackMessage{
-			Username: username + " (" + team + ")",
+			Username: editedusername,
 			Text:     text,
 			//Avatar:   user.Profile.ImageOriginal,
 		}
