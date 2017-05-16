@@ -62,7 +62,7 @@ func (s slackMessage) sendTo(domain, token string) (err error) {
 }
 
 func main() {
-    	api := slack.New("xoxp-3312804109-17631456594-109929503990-2b6d09f7e3b702f6e3530cfe7e2d7b50")
+    	api := slack.New("")
 	m := martini.Classic()
 	m.Post("/bridge", func(res http.ResponseWriter, req *http.Request) {
 		username := req.PostFormValue("user_name")
