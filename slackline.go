@@ -6,13 +6,13 @@ import (
 	"errors"
 	"fmt"
 	"github.com/codegangsta/martini"
-	"github.com/nlopes/slack"
+	//"github.com/nlopes/slack"
 	"io"
 	"io/ioutil"
 	"net/http"
 	"os"
 	"regexp"
-	"strings"
+	//"strings"
 )
 
 const postMessageURL = "/services/hooks/incoming-webhook?token="
@@ -21,7 +21,7 @@ type slackMessage struct {
 	Channel   string `json:"channel"`
 	Username  string `json:"username"`
 	Text      string `json:"text"`
-	Avatar    string `json:"icon_url"`
+	//Avatar    string `json:"icon_url"`
 	LinkNames bool   `json:"link_names"`
 }
 
@@ -76,16 +76,16 @@ func main() {
 		}
 		
 		// Get avatar.
-		user, err := api.GetUserInfo(userid)
+		/*user, err := api.GetUserInfo(userid)
    		if err != nil {
 	  	    fmt.Printf("%s\n", err)
 	  	    return
-   		}
+   		}*/
 
 		msg := slackMessage{
-			Username: username,
+			Username: username + " (" + team + ")",
 			Text:     text,
-			Avatar:   user.Profile.ImageOriginal,
+			//Avatar:   user.Profile.ImageOriginal,
 		}
 
 		domain := req.URL.Query().Get("domain")
