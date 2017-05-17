@@ -10,7 +10,6 @@ import (
 	"io"
 	"io/ioutil"
 	"net/http"
-	"os"
 	"regexp"
 	"strings"
 )
@@ -98,7 +97,7 @@ func main() {
 		userid = strings.Replace(userid, " ", "", -1)
 
 		if admins[username] {
-			editedusername = username + " (" + team + ") [Integrations Admin]"
+			editedusername = username + " (" + team + ") [Admin]"
 		} else {
 			editedusername = username + " (" + team + ")"
 		}
@@ -110,9 +109,6 @@ func main() {
 			}
 		}
 
-		if debug {
-			fmt.Printf("DEBUG: %s | %s | %s | %s | %s", username, editedusername, userid, team)
-		}
 
 		if team == "hellsgamers" {
 			hellsgamers := slack.New("xoxp-3312804109-17631456594-109929503990-2b6d09f7e3b702f6e3530cfe7e2d7b50")
@@ -169,7 +165,8 @@ func main() {
 		domain := req.URL.Query().Get("domain")
 		token := req.URL.Query().Get("token")
 
-		if os.Getenv("DEBUG_BRIDGE") == domain {
+		if debug {
+			fmt.Printf("DEBUG: %s | %s | %s | %s | %s", username, editedusername, userid, team)
 			fmt.Printf("Request: %v\n", req.PostForm)
 			fmt.Printf("Message: %v\n", msg)
 		}
