@@ -78,6 +78,7 @@ func main() {
     "ruthless": true,
     "imasonaz": true,
     "homer": true,
+    "pyrrhic": true,
 	}
 
 	m := martini.Classic()
