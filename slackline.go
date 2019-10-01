@@ -89,7 +89,7 @@ func main() {
 		team := req.PostFormValue("team_domain")
 		userid := req.PostFormValue("user_id")
 		editedusername := "NULL"
-		avatar := "http://expatclaptrap.com/wp-content/uploads/2014/12/Unknown-person1.gif"
+		avatar := "nil"
 		if username == "slackbot" {
 			// Avoid infinite loop
 			return
@@ -112,7 +112,7 @@ func main() {
 
 
 		if team == "hellsgamers" {
-			hellsgamers := slack.New("xoxp-3312804109-17631456594-109929503990-2b6d09f7e3b702f6e3530cfe7e2d7b50")
+			hellsgamers := slack.New("")
 			// Get avatar.
 			hguser, hgerror := hellsgamers.GetUserInfo(userid)
 	   		if hgerror != nil {
@@ -121,7 +121,7 @@ func main() {
 	   		}
 	   		avatar = hguser.Profile.ImageOriginal
 		} else if team == "hg-ce" {
-			hgce := slack.New("xoxp-79475110193-83053515522-185162772727-7b4e053148c7ff26664d041025376a36")
+			hgce := slack.New("")
 			// Get avatar.
 			hgceuser, hgceerror := hgce.GetUserInfo(userid)
 	   		if hgceerror != nil {
@@ -130,7 +130,7 @@ func main() {
 	   		}
 	   		avatar = hgceuser.Profile.ImageOriginal
 		} else if team == "hgdc" {
-			hgdc := slack.New("xoxp-3314437535-27979768499-56435079442-984e0e3695")
+			hgdc := slack.New("")
 			// Get avatar.
 			hgdcuser, hgdcerror := hgdc.GetUserInfo(userid)
 	   		if hgdcerror != nil {
@@ -139,7 +139,7 @@ func main() {
 	   		}
 	   		avatar = hgdcuser.Profile.ImageOriginal
 		} else if team == "hgmods" {
-			hgmods := slack.New("xoxp-3415257541-4188843770-72677959637-70945b73f4")
+			hgmods := slack.New("")
 			// Get avatar.
 			hgmodsuser, hgmodserror := hgmods.GetUserInfo(userid)
 	   		if hgmodserror != nil {
