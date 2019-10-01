@@ -1,4 +1,7 @@
-# SLACKLINE FORK FOR HELLSGAMERS HEROKU DEPLOYMENT
+# SLACKLINE FORK
+### This was used to link our slack channels when we were using slack for communications.
+
+It's a fork of the original slackline, but I added avatar support without having to pay for it (yuck)
 
  1. Create a channel you want to share with another team.
  2. Create an Incoming WebHook integration and select the channel you created.
